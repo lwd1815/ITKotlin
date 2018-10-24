@@ -1,12 +1,12 @@
 package com.example.deepbay.ityjs.base
 
-import android.content.Context
+import android.app.Fragment
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.annotation.LayoutRes
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
+import android.view.ViewGroup
 import android.widget.Toast
 import com.classic.common.MultipleStatusView
 import com.example.deepbay.ityjs.MyApplication
@@ -17,80 +17,84 @@ import pub.devrel.easypermissions.EasyPermissions
 
 /**
  * @author     IT烟酒僧
- * created   2018/10/24 16:04
+ * created   2018/10/24 15:50
  * desc:
  */
-abstract class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
-    /**
-     * 多种状态的 View 的切换
-     */
-    protected var mLayoutStatusView: MultipleStatusView? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(layoutId())
-        initData()
+abstract class BaseFragment :Fragment(),EasyPermissions.PermissionCallbacks{
+    /**
+     * 视图是否加载完毕
+     */
+
+    private var isViewPrepare=false
+
+    /**
+     * 数据是否加载过了
+     */
+
+    private var hasLoadData=false
+
+    /**
+     * 多种状态view的切换
+     */
+    protected var mLayoutStatusView:MultipleStatusView?=null
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return inflater.inflate(getlayoutId(),null)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser){
+            lazyLoadDataIfPrepared()
+        }
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        isViewPrepare=true
         initView()
-        start()
-        initListener()
-
-
+        lazyLoadDataIfPrepared()
+        //多种状态切换的view 重试点击事件
+        mLayoutStatusView?.setOnClickListener(mRetryclickListener)
     }
 
-    private fun initListener() {
-        mLayoutStatusView?.setOnClickListener(mRetryClickListener)
+    private fun lazyLoadDataIfPrepared(){
+        if (userVisibleHint&&isViewPrepare&&!hasLoadData){
+            lazyLoad()
+            hasLoadData=true
+        }
     }
 
-    open val mRetryClickListener: View.OnClickListener = View.OnClickListener {
-        start()
+    open val mRetryclickListener:View.OnClickListener=View.OnClickListener {
+        lazyLoad()
     }
 
+    /**
+     * 加载布局
+     */
+    @LayoutRes
+    abstract fun getlayoutId():Int
 
     /**
-     *  加载布局
+     * 初始化viewI
      */
-    abstract fun layoutId(): Int
 
-    /**
-     * 初始化数据
-     */
-    abstract fun initData()
-
-    /**
-     * 初始化 View
-     */
     abstract fun initView()
 
     /**
-     * 开始请求
+     * 懒加载
      */
-    abstract fun start()
 
-
-    /**
-     * 打卡软键盘
-     */
-    fun openKeyBord(mEditText: EditText, mContext: Context) {
-        val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN)
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-    }
-
-    /**
-     * 关闭软键盘
-     */
-    fun closeKeyBord(mEditText: EditText, mContext: Context) {
-        val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(mEditText.windowToken, 0)
-    }
-
+    abstract fun lazyLoad()
 
     override fun onDestroy() {
         super.onDestroy()
-        MyApplication.getRefWatcher(this)?.watch(this)
+        activity?.let {
+            MyApplication.getRefWatcher(it)?.watch(activity)
+        }
     }
-
-
     /**
      * 重写要申请权限的Activity或者Fragment的onRequestPermissionsResult()方法，
      * 在里面调用EasyPermissions.onRequestPermissionsResult()，实现回调。
@@ -130,7 +134,7 @@ abstract class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCal
         sb.replace(sb.length - 2, sb.length, "")
         //用户点击拒绝并不在询问时候调用
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            Toast.makeText(this, "已拒绝权限" + sb + "并不再询问", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "已拒绝权限" + sb + "并不再询问", Toast.LENGTH_SHORT).show()
             AppSettingsDialog.Builder(this)
                     .setRationale("此功能需要" + sb + "权限，否则无法正常使用，是否打开设置")
                     .setPositiveButton("好")
@@ -139,7 +143,4 @@ abstract class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCal
                     .show()
         }
     }
-
 }
-
-
