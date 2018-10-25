@@ -6,6 +6,7 @@ apply plugin: 'kotlin-android-extensions' //扩展插件
 apply plugin: 'kotlin-kapt'  //kapt3插件
 
 apply from: 'tinker-support.gradle'
+apply from: 'multiple-channel.gradle'
 android {
     signingConfigs{
         config{
@@ -46,7 +47,7 @@ android {
             signingConfig signingConfigs.config
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
             signingConfig signingConfigs.config
@@ -57,7 +58,7 @@ android {
     // 自定义输出配置
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "kotlinmvp_v${variant.versionName}_${variant.name}.apk"
+            outputFileName = "IT_v${variant.versionName}_${variant.name}.apk"
         }
     }
 
