@@ -11,6 +11,9 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
+import com.tencent.bugly.Bugly
+import com.tencent.bugly.beta.Beta
+import com.tencent.bugly.beta.interfaces.BetaPatchListener
 import kotlin.properties.Delegates
 
 
@@ -45,7 +48,7 @@ class MyApplication : Application(){
         initConfig()
         DisplayManager.init(this)
         registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
-
+        initBugly()
 
     }
 
@@ -54,6 +57,54 @@ class MyApplication : Application(){
             RefWatcher.DISABLED
         } else LeakCanary.install(this)
     }
+
+    private fun  initBugly(){
+        Bugly.init(this,"c8f3b1e599",false)
+        // 设置是否开启热更新能力，默认为true
+        Beta.enableHotfix = true
+        // 设置是否自动下载补丁，默认为true
+        Beta.canAutoDownloadPatch = true
+        // 设置是否自动合成补丁，默认为true
+        Beta.canAutoPatch = true
+        // 设置是否提示用户重启，默认为false
+        Beta.canNotifyUserRestart = true
+        // 补丁回调接口
+        Beta.betaPatchListener = object : BetaPatchListener {
+            override fun onPatchReceived(patchFile: String) {
+                //        Toast.makeText(getApplication(), "补丁下载地址" + patchFile, Toast.LENGTH_SHORT).show();
+            }
+
+            override fun onDownloadReceived(savedLength: Long, totalLength: Long) {
+                //        Toast.makeText(getApplication(),
+                //                String.format(Locale.getDefault(), "%s %d%%",
+                //                        Beta.strNotificationDownloading,
+                //                        (int) (totalLength == 0 ? 0 : savedLength * 100 / totalLength)),
+                //                Toast.LENGTH_SHORT).show();
+            }
+
+            override fun onDownloadSuccess(msg: String) {
+                //        Toast.makeText(getApplication(), "补丁下载成功", Toast.LENGTH_SHORT).show();
+            }
+
+            override fun onDownloadFailure(msg: String) {
+                //        Toast.makeText(getApplication(), "补丁下载失败", Toast.LENGTH_SHORT).show();
+
+            }
+
+            override fun onApplySuccess(msg: String) {
+                //        Toast.makeText(getApplication(), "补丁应用成功", Toast.LENGTH_SHORT).show();
+            }
+
+            override fun onApplyFailure(msg: String) {
+                //        Toast.makeText(getApplication(), "补丁应用失败", Toast.LENGTH_SHORT).show();
+            }
+
+            override fun onPatchRollback() {
+
+            }
+        }
+    }
+
 
 
     /**
@@ -106,4 +157,9 @@ class MyApplication : Application(){
     }
 
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+
+        Beta.installTinker()
+    }
 }
