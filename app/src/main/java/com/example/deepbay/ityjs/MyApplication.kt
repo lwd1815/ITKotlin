@@ -152,7 +152,7 @@ class MyApplication : Application(){
         }
 
         override fun onActivityDestroyed(activity: Activity) {
-            Log.d(TAG, "onDestroy: " + activity.componentName.className)
+             Log.d(TAG, "onDestroy: " + activity.componentName.className)
         }
     }
 

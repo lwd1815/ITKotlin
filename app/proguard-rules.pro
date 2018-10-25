@@ -19,6 +19,18 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
+
+# Do not strip any method/class that is annotated with @DoNotStrip
+-keep @com.facebook.common.internal.DoNotStrip class *
+-keepclassmembers class * {
+    @com.facebook.common.internal.DoNotStrip *;
+}
+-ignorewarnings
+# Keep native methods
+-keepclassmembers class * {
+    native <methods>;
+}
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
 # tinker混淆规则
