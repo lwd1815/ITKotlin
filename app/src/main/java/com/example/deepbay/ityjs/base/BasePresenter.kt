@@ -10,6 +10,7 @@ import io.reactivex.disposables.Disposable
  * desc:
  */
 
+//T : IbaseView 表示上线为Ibaseview I可以是Ibaseview及其子类
 open  class BasePresenter<T:IBaseView> :IPresenter<T>{
 
     var mRootView:T?=null
