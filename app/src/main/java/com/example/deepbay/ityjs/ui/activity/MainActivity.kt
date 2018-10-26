@@ -1,7 +1,8 @@
-package com.example.deepbay.ityjs
+package com.example.deepbay.ityjs.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.example.deepbay.ityjs.R
 
 class MainActivity : AppCompatActivity() {
 
