@@ -6,12 +6,11 @@ import com.example.deepbay.ityjs.base.BaseFragment
 
 /**
  * @author     IT烟酒僧
- * created   2018/10/26 12:38
+ * created   2018/10/27 16:44
  * desc:
  */
-class HomeFragment :BaseFragment(){
-    override fun getlayoutId(): Int=R.layout.fragment_home
-
+class RankFragment:BaseFragment(){
+    override fun getlayoutId(): Int = R.layout.fragment_rank
 
     override fun initView() {
 
