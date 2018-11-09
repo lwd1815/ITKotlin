@@ -1,6 +1,7 @@
 package com.example.deepbay.ityjs.ui.activity
 
 import android.os.Bundle
+import android.support.v4.app.FragmentTransaction
 import com.example.deepbay.ityjs.R
 import com.example.deepbay.ityjs.base.BaseActivity
 import com.example.deepbay.ityjs.mvp.TabEntity
@@ -52,7 +53,7 @@ class MainActivity : BaseActivity() {
         it_main_tab_layout.setOnTabSelectListener(object :OnTabSelectListener{
 
             override fun onTabSelect(position: Int) {
-
+                switchFragment(position)
             }
             override fun onTabReselect(position: Int) {
 
@@ -68,7 +69,13 @@ class MainActivity : BaseActivity() {
         val transaction=supportFragmentManager.beginTransaction()
         hideFragments(transaction)
         when(position){
-            0->mHomeFragment?.let { transaction.show(it) }?:HomeFragment.
+            0
+            ->mHomeFragment?.let {
+                transaction.show(it)
+            }?:HomeFragment.getInstance(mTitles[position]).let {
+                mHomeFragment=it
+                transaction.add(R.id.it_main_fl_container,it,"home")
+            }
 
         }
     }
@@ -86,4 +93,16 @@ class MainActivity : BaseActivity() {
     override fun start() {
 
     }
+    /**
+     * 隐藏所有的Fragment
+     * @param transaction transaction
+     */
+    private fun hideFragments(transaction: FragmentTransaction) {
+        mHomeFragment?.let { transaction.hide(it) }
+        mDiscoveryFragment?.let { transaction.hide(it) }
+        mHotFragment?.let { transaction.hide(it) }
+        mMineFragment?.let { transaction.hide(it) }
+    }
+
+
 }

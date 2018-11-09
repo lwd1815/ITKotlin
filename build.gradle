@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.tencent.bugly:tinker-support:1.1.2"
         classpath 'com.meituan.android.walle:plugin:1.1.6'
@@ -18,10 +18,16 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         jcenter()
+        mavenCentral()
+        google()
+        maven { url "https://jitpack.io" }
         maven {
-            url "https://jitpack.io"
+            url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/"
+        }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
         }
     }
 }

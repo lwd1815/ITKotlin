@@ -1,8 +1,7 @@
 package com.example.deepbay.ityjs.base
-
-import android.app.Fragment
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,7 @@ import pub.devrel.easypermissions.EasyPermissions
  * desc:
  */
 
-abstract class BaseFragment :Fragment(),EasyPermissions.PermissionCallbacks{
+abstract class BaseFragment : Fragment(),EasyPermissions.PermissionCallbacks{
     /**
      * 视图是否加载完毕
      */
@@ -51,7 +50,7 @@ abstract class BaseFragment :Fragment(),EasyPermissions.PermissionCallbacks{
         }
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isViewPrepare=true
         initView()

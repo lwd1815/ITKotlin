@@ -10,7 +10,7 @@ import com.example.deepbay.ityjs.base.BaseFragment
  * created   2018/10/26 12:38
  * desc:
  */
-class HomeFragment :BaseFragment(){
+class HomeFragment:BaseFragment(){
     private val mPresenter by lazy {  }
 
     companion object {
@@ -18,7 +18,7 @@ class HomeFragment :BaseFragment(){
             val fragment=HomeFragment()
             val bundle=Bundle()
             fragment.arguments=bundle
-
+            return fragment;
         }
     }
 

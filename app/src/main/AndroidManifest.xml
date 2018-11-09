@@ -28,9 +28,7 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
-        <activity android:name=".ui.activity.MainActivity"
-
-        >
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
