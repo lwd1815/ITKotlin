@@ -1,5 +1,10 @@
 package com.example.deepbay.ityjs.mvp.model
 
+import com.example.deepbay.ityjs.mvp.model.bean.HomeBean
+import com.example.deepbay.ityjs.net.RetrofitManager
+import com.example.deepbay.ityjs.rx.SchedulerUtils
+import io.reactivex.Observable
+
 
 /**
  * @author     IT烟酒僧
@@ -10,7 +15,8 @@ class HomeModel{
     /**
      * 获取首页Banner数据
      */
-//    fun requestHomeData(num:Int):Observable<HomeBean>{
-//
-//    }
+    fun requestHomeData(num:Int):Observable<HomeBean>{
+        return RetrofitManager.service.getFirstHomeData(num)
+                .compose(SchedulerUtils.inToMain())
+    }
 }
