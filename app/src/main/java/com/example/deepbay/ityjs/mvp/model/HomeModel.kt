@@ -19,4 +19,13 @@ class HomeModel{
         return RetrofitManager.service.getFirstHomeData(num)
                 .compose(SchedulerUtils.inToMain())
     }
+
+    /**
+     * 加载更多
+     */
+
+    fun loadMoreData(url:String):Observable<HomeBean>{
+        return RetrofitManager.service.getMoreHomeData(url)
+                .compose(SchedulerUtils.inToMain())
+    }
 }
