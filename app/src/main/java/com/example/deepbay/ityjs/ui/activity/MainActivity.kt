@@ -45,6 +45,9 @@ class MainActivity : BaseActivity() {
 
     //初始化底部菜单
     private fun initTab(){
+        //mapto 将给定的变换函数应用于原始数组的每个元素，并将结果附加到给定目标。
+        //按我的理解
+        //就是在相当于遍历标题,给每个索引的数组赋值后然后添加到mtabentities集合中
         (0 until mTitles.size).mapTo(mTabEntities){
             TabEntity(mTitles[it],mIconSelectIds[it],mIconUnSelectIds[it])
         }
@@ -70,6 +73,9 @@ class MainActivity : BaseActivity() {
         hideFragments(transaction)
         when(position){
             0
+                //?.表示安全调用,当homefragment不为空时,切换他,当为空时,返回null
+                //?: 是在前面的基础上写的,意思是当前面返回null时,我们不返回null,而是返回另一个值,也就是:后面的部分
+                //let 是一个作用域,在此域中,可以对调用他的对象做各种操作,用it代替调用对象,最后一行为返回值
             ->mHomeFragment?.let {
                 transaction.show(it)
             }?:HomeFragment.getInstance(mTitles[position]).let {
