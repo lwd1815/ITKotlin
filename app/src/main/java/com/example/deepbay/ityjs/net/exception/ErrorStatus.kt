@@ -9,6 +9,13 @@ package com.example.deepbay.ityjs.net.exception
 object ErrorStatus{
 
     /**
+     * java中静态变量和静态方法可以直接用类名调用
+     * kotlin中,静态方法和静态变量会被放在companion object中,当成伴生方法和伴生常量,如果想直接用类名调用,需要添加注解
+     * 在companion object中的公共函数必须用使用@JvmStatic注解才能暴露为静态方法
+     * 如果没有这个注解,这些函数仅可用作静态Companion字段上的实例方法
+     *
+     */
+    /**
      * 响应成功
      */
     @JvmField
