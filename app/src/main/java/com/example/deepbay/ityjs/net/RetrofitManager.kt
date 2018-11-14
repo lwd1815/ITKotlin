@@ -21,6 +21,18 @@ import java.util.concurrent.TimeUnit
  * desc:
  */
 object RetrofitManager {
+    /**
+     * kotlin中属性在声明的同时也要求要被初始化,否则会报错,可是有时候,我们并不想声明一个类型可控的对象,而且也没有办法在对象刚声明的时候就为它初始化,
+     * 那么这时就需要用到kotlin提供的延迟初始化
+     *
+     * lateinit 和lazy 是kotlin中的两种不同的延迟初始化的实现
+     *
+     * lateinit 只用于变量var,而lazy只用于常量val
+     *
+     * lazy 应用于单例模式,而且当且仅当变量被第一次调用的时候,委托方法才会执行
+     */
+
+    //第一次调用后被初始化之后就不在走此方法
     val service: ApiService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         getRetrofit().create(ApiService::class.java)
     }
