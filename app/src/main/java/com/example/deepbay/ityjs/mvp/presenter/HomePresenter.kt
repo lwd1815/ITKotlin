@@ -17,6 +17,10 @@ import com.example.deepbay.ityjs.net.exception.ExceptionHandle
 
 class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter {
 
+    //HomePreSenter 是persenter的实现类,由于attchView和detchView是公共类.所以又单独抽出来放在basePreSenter中,而Home独有的接口放在HomeContract.Presenter中
+    //而BasePresenter中持有View对象,具体的view又调用baserPreSenter的实类实现,在homePresenter中持有view对象,调用view的方法,更新view
+    //并且,new出model对象.调用model中的方法实现数据请求
+
 
     private var bannerHomeBean: HomeBean? = null
     private var nextPageUrl: String? = null //加载首页的banner 数据+-一页数据合并后,nextPageUrl没add
@@ -63,6 +67,7 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
                         bannerHomeBean!!.issueList[0].count = bannerHomeBean!!.issueList[0].itemList.size
                         //赋值过滤后的数据+Banner数据
                         bannerHomeBean?.issueList!![0].itemList.addAll(newBannerItemList)
+                        //数据请求出来后,因为持有view对象,调用view方法,将数据传递过去
                         setHomeData(bannerHomeBean!!)
                     }
                 }, { t ->
