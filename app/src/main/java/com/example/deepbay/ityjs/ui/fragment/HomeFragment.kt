@@ -163,6 +163,7 @@ class HomeFragment:BaseFragment(),HomeContract.View{
         if (isRefresh){
             isRefresh=false;
             mLayoutStatusView?.showLoading()
+
         }
     }
 
