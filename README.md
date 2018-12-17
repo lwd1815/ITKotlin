@@ -13,7 +13,7 @@
 
 ![这里写图片描述](http://oyp2zrwnm.bkt.clouddn.com/ic_launcher.png)
 
-- **GitHub地址：** [https://github.com/git-xuhao/KotlinMvp](https://github.com/git-xuhao/KotlinMvp)
+- **GitHub地址：** [https://github.com/lwd1815/ITKotlin](https://github.com/lwd1815/ITKotlin)
 
 - **(附上 Java 版本的MVP基础框架)** [https://github.com/git-xuhao/Android-MVP-Architecture](https://github.com/git-xuhao/Android-MVP-Architecture)
 
