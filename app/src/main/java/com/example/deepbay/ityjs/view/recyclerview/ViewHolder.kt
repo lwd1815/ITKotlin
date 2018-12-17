@@ -40,7 +40,7 @@ class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
             view=itemView.findViewById(viewId)
             mView?.put(viewId,view)
         }
-        return view as T
+        return view as  T
     }
 
 

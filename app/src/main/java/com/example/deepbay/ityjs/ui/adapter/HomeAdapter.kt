@@ -180,7 +180,7 @@ class HomeAdapter(context: Context,data:ArrayList<HomeBean.Issue.Item>):CommonAd
                     .into(holder.getView(R.id.iv_avatar))
         }
 
-        //holder.setText(R.id.title,itemData?.title?:"")
+        holder.setText(R.id.tv_title,itemData?.title?:"")
 
         //遍历标签
         itemData?.tags?.take(4)?.forEach {
