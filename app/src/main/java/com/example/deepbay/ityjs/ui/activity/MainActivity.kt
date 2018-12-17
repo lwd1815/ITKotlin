@@ -76,14 +76,20 @@ class MainActivity : BaseActivity() {
                 //?.表示安全调用,当homefragment不为空时,切换他,当为空时,返回null
                 //?: 是在前面的基础上写的,意思是当前面返回null时,我们不返回null,而是返回另一个值,也就是:后面的部分
                 //let 是一个作用域,在此域中,可以对调用他的对象做各种操作,用it代替调用对象,最后一行为返回值
+                //it 谁调用高阶函数,代表的就是谁
             ->mHomeFragment?.let {
                 transaction.show(it)
             }?:HomeFragment.getInstance(mTitles[position]).let {
                 mHomeFragment=it
                 transaction.add(R.id.it_main_fl_container,it,"home")
             }
+            else->{
 
+            }
         }
+        mIndex=position;
+        it_main_tab_layout.currentTab=mIndex
+        transaction.commitAllowingStateLoss()
     }
 
     override fun layoutId(): Int =R.layout.activity_main

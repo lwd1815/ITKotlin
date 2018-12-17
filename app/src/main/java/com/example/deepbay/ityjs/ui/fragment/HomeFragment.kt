@@ -134,6 +134,7 @@ class HomeFragment:BaseFragment(),HomeContract.View{
         //Adapter
         mHomeAdapter=activity?.let { HomeAdapter(it,homeBean.issueList[0].itemList) }
         //设置banner大小
+        mHomeAdapter?.setBannerSize(homeBean.issueList[0].count)
         //mHomeAdapter?.
 
         mRecyclerView.adapter=mHomeAdapter
