@@ -45,7 +45,7 @@ Kotlin 团队为 Android 开发提供了一套超越标准语言功能的工具�
 
 
 ## 下载体验
-###下载链接来自于KotlinMvp
+** 下载链接来自于KotlinMvp **
 
 点击[![](https://img.shields.io/badge/Download-apk-green.svg)](https://fir.im/kotlinmvp) 或者扫描下方二维码
 
@@ -87,7 +87,8 @@ Kotlin 团队为 Android 开发提供了一套超越标准语言功能的工具�
 ## 声明
 **项目中的 API 均来自开眼视频，纯属学习交流使用，不得用于商业用途！**
 ## 关于我
-**公众号:IT烟酒僧 **
+**公众号:IT烟酒僧**
+
 **中国矿业大学(北京)小硕一枚,Android开发者,欢迎关注公众号,和我一起学习Android,kotlin,Java,js,python **
 
 <img src="https://img-blog.csdn.net/20180824124512705?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM4MDkxODAw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width = "250" height = "250" alt="IT烟酒僧" align=center/>
