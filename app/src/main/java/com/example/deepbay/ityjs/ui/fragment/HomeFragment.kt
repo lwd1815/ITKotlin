@@ -38,6 +38,7 @@ class HomeFragment:BaseFragment(),HomeContract.View{
     private var loadingMore=false
     private var isRefresh=false
     private var mMaterialHeader:MaterialHeader?=null
+    //companion object修饰的方法为静态方法 唯一
     companion object {
         fun getInstance(title:String):HomeFragment{
             val fragment=HomeFragment()

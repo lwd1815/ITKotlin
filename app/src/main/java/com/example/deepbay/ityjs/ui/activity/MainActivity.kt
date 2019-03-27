@@ -2,6 +2,7 @@ package com.example.deepbay.ityjs.ui.activity
 
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
+import android.view.View
 import com.example.deepbay.ityjs.R
 import com.example.deepbay.ityjs.base.BaseActivity
 import com.example.deepbay.ityjs.mvp.TabEntity
@@ -62,6 +63,12 @@ class MainActivity : BaseActivity() {
 
             }
         })
+
+        it_main_tab_layout.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+
+            }
+        })
     }
 
 
@@ -83,9 +90,8 @@ class MainActivity : BaseActivity() {
                 mHomeFragment=it
                 transaction.add(R.id.it_main_fl_container,it,"home")
             }
-            else->{
-
-            }
+            //发现
+            1 ->mDiscoveryFragment?.let { transaction.show(it) }
         }
         mIndex=position;
         it_main_tab_layout.currentTab=mIndex
@@ -107,6 +113,8 @@ class MainActivity : BaseActivity() {
     }
     /**
      * 隐藏所有的Fragment
+     * 如果fragment==null {} 中的操作不会进行
+     * 如果fragment!=null {} 中的操作正常执行
      * @param transaction transaction
      */
     private fun hideFragments(transaction: FragmentTransaction) {
