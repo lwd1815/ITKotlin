@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.example.deepbay.ityjs.R
 import com.example.deepbay.ityjs.base.BaseFragment
 import com.example.deepbay.ityjs.base.BaseFragmentAdapter
+import com.example.deepbay.ityjs.view.TablayoutHelper
 import com.hazz.kotlinmvp.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.fragment_hot.*
 import java.util.*
@@ -55,6 +56,7 @@ class DisCoveryFragment:BaseFragment(){
         mViewPager.adapter=BaseFragmentAdapter(childFragmentManager,fragments,tablist)
 
         mTabLayout.setupWithViewPager(mViewPager)
+        TablayoutHelper.setUpIndicatorWidth(mTabLayout)
     }
 
     override fun lazyLoad() {
