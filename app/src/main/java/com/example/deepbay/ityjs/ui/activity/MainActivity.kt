@@ -91,7 +91,11 @@ class MainActivity : BaseActivity() {
                 transaction.add(R.id.it_main_fl_container,it,"home")
             }
             //发现
-            1 ->mDiscoveryFragment?.let { transaction.show(it) }
+            1 ->mDiscoveryFragment?.let { transaction.show(it)
+            }?:DisCoveryFragment.getInstance(mTitles[position]).let {
+                mDiscoveryFragment=it
+                transaction.add(R.id.it_main_fl_container,it,"discover")
+            }
         }
         mIndex=position;
         it_main_tab_layout.currentTab=mIndex

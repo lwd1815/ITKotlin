@@ -78,5 +78,8 @@ abstract class CommonAdapter<T>(var mContex:Context,var mData:ArrayList<T>,priva
     fun setOnItemLongClickListener(itemLongClickListener: OnItemLongClickListener){
         this.mItemLongClickListener=itemLongClickListener
     }
+
+
+
 }
 
