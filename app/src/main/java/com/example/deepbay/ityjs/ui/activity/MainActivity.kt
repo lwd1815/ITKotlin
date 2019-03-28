@@ -96,6 +96,13 @@ class MainActivity : BaseActivity() {
                 mDiscoveryFragment=it
                 transaction.add(R.id.it_main_fl_container,it,"discover")
             }
+            //排行
+            2->mHotFragment?.let{
+                transaction.show(it)
+            }?:HotFragment.getInstance(mTitles[position]).let {
+                mHotFragment=it
+                transaction.add(R.id.it_main_fl_container,it,"hot")
+            }
         }
         mIndex=position;
         it_main_tab_layout.currentTab=mIndex
