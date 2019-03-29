@@ -37,6 +37,7 @@
         </activity>
 
         <activity android:name=".ui.activity.CategoryDetailActivity"/>
+        <activity android:name=".ui.activity.VideoDetailActivity"/>
         <!-- bugly start -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
