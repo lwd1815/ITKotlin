@@ -1,6 +1,8 @@
 package com.example.deepbay.ityjs.ui.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.view.View
 import android.widget.ImageView
@@ -8,9 +10,11 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.example.deepbay.ityjs.Constants
 import com.example.deepbay.ityjs.MyApplication
 import com.example.deepbay.ityjs.R
 import com.example.deepbay.ityjs.mvp.model.bean.CategoryBean
+import com.example.deepbay.ityjs.ui.activity.CategoryDetailActivity
 import com.example.deepbay.ityjs.view.recyclerview.ViewHolder
 import com.example.deepbay.ityjs.view.recyclerview.adapter.CommonAdapter
 
@@ -58,7 +62,9 @@ class CategoryAdapter(mContext:Context,categoryList:ArrayList<CategoryBean>,layo
 
         holder.setOnItemClickListener(object :View.OnClickListener{
             override fun onClick(v: View?) {
-
+                val intent=Intent(mContex as Activity,CategoryDetailActivity::class.java)
+                intent.putExtra(Constants.BUNDLE_CATEGORY_DATA,data)
+                mContex.startActivity(intent)
             }
         })
     }
