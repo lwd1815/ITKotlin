@@ -89,11 +89,14 @@ class CategoryDetailActivity:BaseActivity(),CategoryDetailContract.View{
     }
 
     override fun start() {
-
+        categoryData?.id?.let {
+            mPresenter.getCategoryDetailList(it)
+        }
     }
 
     override fun setCateDetailList(itemList: ArrayList<HomeBean.Issue.Item>) {
-
+        loadingMore=false
+        mAdapter.addData(itemList)
     }
 
     override fun showError(errorMsg: String) {
@@ -106,6 +109,11 @@ class CategoryDetailActivity:BaseActivity(),CategoryDetailContract.View{
 
     override fun dismissLoading() {
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.detachView()
     }
 
 }
