@@ -36,5 +36,7 @@ class Constants private constructor() {
         val FILE_WATCH_HISTORY_NAME = "watch_history_file"   //观看记录
 
         val FILE_COLLECTION_NAME = "collection_file"    //收藏视屏缓存的文件名
+
+        val DEBUG_LOG="CREAT A NEW BRABCH IS QUICK"
     }
 }
